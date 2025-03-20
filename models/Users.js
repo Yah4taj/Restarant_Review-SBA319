@@ -2,6 +2,10 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
+ user_id:{
+  type: String,
+   unique: true,
+  } ,
     username: {
       type: String,
       required: true,
@@ -15,15 +19,20 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
-    },
-  },
-  {
-    timestamps: true,
-  },
+//       validate: {
+//         validator: function(v) {
+//           return /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,20}$/.test(v);  //
+// },
+//         message:props => `${props.value} is not a valid password!`
+      
+//     }
+  }},
+      {
+        timestamps: true,
+      },
 );
 
-userSchema.index({username: 1});
-userSchema.index({email: 1});
+
 
 
 

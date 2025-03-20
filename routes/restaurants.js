@@ -1,7 +1,7 @@
 
 import express from 'express';
 import Restaurant from '../models/Restaurants.js';
-const userRouter = express.Router();
+const router = express.Router();
 
 
 router.post("/", (req,res) => {

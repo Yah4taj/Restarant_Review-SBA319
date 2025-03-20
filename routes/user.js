@@ -1,65 +1,74 @@
 import express from 'express';
-import User from '../models/Users.js';
-const userRouter = express.Router();
+import User from '../models/Users.js'; // Ensure correct path
 
-router.post('/', async(req,res) => {
-    try{
-const user =new User (req.body);
-await user.save();
-res.status(201).json(user);
+const router = express.Router();
 
-    }catch(e) {
-console.error(e);
-rest
+// POST - Create a new user
+router.post('/', async (req, res) => {
+    try {
+        const user = new User(req.body);
+        await user.save();
+        res.status(201).json(user);
+    } catch (e) {
+        console.error(e);
+        res.status(400).json({ message: e.message });
     }
-})
-
-
-router.get('/',(req,res) => {
-    const users = userModel.getAllUsers(req.query);
-    res.json(users);
 });
+
+// GET all users
+
+router.get('/', async (req, res) => {
+    try {
+        const users = await User.find();
+        res.json(users);
+    } catch (e) {
+        console.error(e);
+        res.status(500).json({ message: e.message });
+    }
+});
+
 // GET a specific user by ID
-router.get('/:id', (req, res) => {
-    const user = userModel.getUserById(req.params.id);
-    
-    if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+router.get('/:id', async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        res.json(user);
+    } catch (e) {
+        console.error(e);
+        res.status(500).json({ message: e.message });
     }
-    
-    res.json(user);
-  });
-  
-  // POST - Create a new user
-  router.post('/', validateUser, (req, res) => {
-    const { username, email } = req.body;
-    const newUser = userModel.createUser({ username, email });
-    
-    res.status(201).json(newUser);
-  });
-  
-  // PATCH - Update a user
-router.patch('/:id', (req, res) => {
-    const { username, email } = req.body;
-    const updatedUser = userModel.updateUser(req.params.id, { username, email });
-    
-    if (!updatedUser) {
-      return res.status(404).json({ error: 'User not found' });
+});
+
+// PATCH - Update a user
+router.patch('/:id', async (req, res) => {
+    try {
+        const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!updatedUser) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        res.json(updatedUser);
+    } catch (e) {
+        console.error(e);
+        res.status(500).json({ message: e.message });
     }
-    
-    res.json(updatedUser);
-  });
-  
-  // DELETE - Remove a user
-  router.delete('/:id', (req, res) => {
-    const success = userModel.deleteUser(req.params.id);
-    
-    if (!success) {
-      return res.status(404).json({ error: 'User not found' });
+});
+
+// DELETE - Remove a user
+router.delete('/:id', async (req, res) => {
+    try {
+        const deletedUser = await User.findByIdAndDelete(req.params.id);
+        if (!deletedUser) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        res.status(204).end();
+    } catch (e) {
+        console.error(e);
+        res.status(500).json({ message: e.message });
     }
-    
-    res.status(204).end();
-  });
-  
-  module.exports = router;
- 
+});
+
+// Export using ES Modules
+
+export default router;
