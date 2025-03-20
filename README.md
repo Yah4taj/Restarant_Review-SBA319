@@ -1,8 +1,16 @@
-A Backend API Template
 
-##Instructions
+Restaurant Review
 
-1. clone the repo `git clone <repo-url> <new project-name>`
-2. cd into your new project folder and run `npm i`
-3. Create a new .env file and add the `MONGODB_URI`  (in api-exercise)
-4. Run the app with: `npm run dev`
+Mongo Database Application
+
+created the following to display users and data for a restaurant review application
+
+Created a server application with Node, Express, and MongoDB.
+Created a CRUD API using Express and MongoDB.
+Created MongoDB indexes.
+Used MongoDB indexing to make efficient queries.
+Created MongoDB validation rules.
+Used MongoDB validation to ensure data consistency.
+
+Tech and dependencies
+NodeJS, MongoDB,Express, 
