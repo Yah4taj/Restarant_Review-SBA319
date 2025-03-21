@@ -14,3 +14,5 @@ Used MongoDB validation to ensure data consistency.
 
 Tech and dependencies
 NodeJS, MongoDB,Express, 
+
+CRUD successfully functioning for users routes, however still troubleshooting posted restaurant reviews from users.
