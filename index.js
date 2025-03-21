@@ -43,7 +43,8 @@ app.get("/", (req, res) => {
 // API Routes
 app.use("/api/health", healthRouter);
 app.use("/api/user", router);
-app.use("api/review", router);
+app.use("/api/review", router);
+app.use("/api/restaurant", router);
 
 // Global error handling
 app.use((err, req, res, next) => {

@@ -2,10 +2,10 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
- user_id:{
-  type: String,
-   unique: true,
-  } ,
+    userId: {
+      type: String,
+      unique: true,
+    },
     username: {
       type: String,
       required: true,
@@ -19,27 +19,13 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
-//       validate: {
-//         validator: function(v) {
-//           return /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,20}$/.test(v);  //
-// },
-//         message:props => `${props.value} is not a valid password!`
       
-//     }
-  }},
-      {
-        timestamps: true,
-      },
+    }
+  },
+  {
+    timestamps: true,
+  }
 );
+const User = mongoose.model('User', userSchema);
 
-
-
-
-
-export default mongoose.model("User", userSchema);
-
-
-
-
-
-
+export default User;

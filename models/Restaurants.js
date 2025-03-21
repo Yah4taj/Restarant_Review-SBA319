@@ -14,7 +14,7 @@ const restaurantSchema = new mongoose.Schema(
         required: true,
         unique: true,
       },
-      restaurant_id: {
+      restaurantId: {
         type: Number,
         required: true,
         unique: true,
